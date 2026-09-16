@@ -15,6 +15,8 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAvaliacoesRouteImport } from './routes/admin.avaliacoes'
+import { Route as AdminCursosRouteImport } from './routes/admin.cursos'
+import { Route as AdminProfessoresRouteImport } from './routes/admin.professores'
 import { Route as AdminRelatoriosRouteImport } from './routes/admin.relatorios'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +49,16 @@ const AdminAvaliacoesRoute = AdminAvaliacoesRouteImport.update({
   path: '/avaliacoes',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCursosRoute = AdminCursosRouteImport.update({
+  id: '/cursos',
+  path: '/cursos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProfessoresRoute = AdminProfessoresRouteImport.update({
+  id: '/professores',
+  path: '/professores',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminRelatoriosRoute = AdminRelatoriosRouteImport.update({
   id: '/relatorios',
   path: '/relatorios',
@@ -59,6 +71,8 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/setup': typeof SetupRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
+  '/admin/cursos': typeof AdminCursosRoute
+  '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -67,6 +81,8 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/setup': typeof SetupRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
+  '/admin/cursos': typeof AdminCursosRoute
+  '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -77,6 +93,8 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/setup': typeof SetupRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
+  '/admin/cursos': typeof AdminCursosRoute
+  '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -88,6 +106,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup'
     | '/admin/avaliacoes'
+    | '/admin/cursos'
+    | '/admin/professores'
     | '/admin/relatorios'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -96,6 +116,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup'
     | '/admin/avaliacoes'
+    | '/admin/cursos'
+    | '/admin/professores'
     | '/admin/relatorios'
     | '/admin'
   id:
@@ -105,6 +127,8 @@ export interface FileRouteTypes {
     | '/login'
     | '/setup'
     | '/admin/avaliacoes'
+    | '/admin/cursos'
+    | '/admin/professores'
     | '/admin/relatorios'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -160,6 +184,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAvaliacoesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/cursos': {
+      id: '/admin/cursos'
+      path: '/cursos'
+      fullPath: '/admin/cursos'
+      preLoaderRoute: typeof AdminCursosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/professores': {
+      id: '/admin/professores'
+      path: '/professores'
+      fullPath: '/admin/professores'
+      preLoaderRoute: typeof AdminProfessoresRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/relatorios': {
       id: '/admin/relatorios'
       path: '/relatorios'
@@ -172,12 +210,16 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminAvaliacoesRoute: typeof AdminAvaliacoesRoute
+  AdminCursosRoute: typeof AdminCursosRoute
+  AdminProfessoresRoute: typeof AdminProfessoresRoute
   AdminRelatoriosRoute: typeof AdminRelatoriosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAvaliacoesRoute: AdminAvaliacoesRoute,
+  AdminCursosRoute: AdminCursosRoute,
+  AdminProfessoresRoute: AdminProfessoresRoute,
   AdminRelatoriosRoute: AdminRelatoriosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
