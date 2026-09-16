@@ -15,6 +15,23 @@ const teacherSchema = z.object({
   password: z.string().min(8, "A senha deve ter ao menos 8 caracteres").max(72),
 });
 
+/** Turns Supabase sign-up failures into clear Portuguese guidance. */
+function describeSignupError(error: unknown): string {
+  const code = (error as { code?: string } | null)?.code ?? "";
+  const message = (error as { message?: string } | null)?.message ?? "";
+  if (code === "weak_password" || /weak|pwned/i.test(message)) {
+    return "Esta senha é muito comum e foi exposta em vazamentos. Escolha uma senha mais forte.";
+  }
+  if (code === "email_exists" || /already been registered|already registered/i.test(message)) {
+    return "Este e-mail já está cadastrado no sistema.";
+  }
+  if (/password/i.test(message)) {
+    return "A senha não atende aos requisitos mínimos de segurança.";
+  }
+  return "Não foi possível criar o acesso. Revise os dados e tente novamente.";
+}
+
+
 /** Public: tells the setup screen whether the first administrator already exists. */
 export const getSetupStatus = createServerFn({ method: "GET" }).handler(async () => {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
