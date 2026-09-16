@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProfessorRouteImport } from './routes/professor'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAlunosRouteImport } from './routes/admin.alunos'
@@ -22,6 +23,12 @@ import { Route as AdminModulosRouteImport } from './routes/admin.modulos'
 import { Route as AdminProfessoresRouteImport } from './routes/admin.professores'
 import { Route as AdminRelatoriosRouteImport } from './routes/admin.relatorios'
 import { Route as AdminTurmasRouteImport } from './routes/admin.turmas'
+import { Route as ProfessorIndexRouteImport } from './routes/professor.index'
+import { Route as ProfessorAvaliacoesRouteImport } from './routes/professor.avaliacoes'
+import { Route as ProfessorCorrecoesRouteImport } from './routes/professor.correcoes'
+import { Route as ProfessorPerfilRouteImport } from './routes/professor.perfil'
+import { Route as ProfessorResultadosRouteImport } from './routes/professor.resultados'
+import { Route as ProfessorTurmasRouteImport } from './routes/professor.turmas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,6 +43,11 @@ const AdminRoute = AdminRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfessorRoute = ProfessorRouteImport.update({
+  id: '/professor',
+  path: '/professor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SetupRoute = SetupRouteImport.update({
@@ -88,11 +100,42 @@ const AdminTurmasRoute = AdminTurmasRouteImport.update({
   path: '/turmas',
   getParentRoute: () => AdminRoute,
 } as any)
+const ProfessorIndexRoute = ProfessorIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfessorRoute,
+} as any)
+const ProfessorAvaliacoesRoute = ProfessorAvaliacoesRouteImport.update({
+  id: '/avaliacoes',
+  path: '/avaliacoes',
+  getParentRoute: () => ProfessorRoute,
+} as any)
+const ProfessorCorrecoesRoute = ProfessorCorrecoesRouteImport.update({
+  id: '/correcoes',
+  path: '/correcoes',
+  getParentRoute: () => ProfessorRoute,
+} as any)
+const ProfessorPerfilRoute = ProfessorPerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => ProfessorRoute,
+} as any)
+const ProfessorResultadosRoute = ProfessorResultadosRouteImport.update({
+  id: '/resultados',
+  path: '/resultados',
+  getParentRoute: () => ProfessorRoute,
+} as any)
+const ProfessorTurmasRoute = ProfessorTurmasRouteImport.update({
+  id: '/turmas',
+  path: '/turmas',
+  getParentRoute: () => ProfessorRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/professor': typeof ProfessorRouteWithChildren
   '/setup': typeof SetupRoute
   '/admin/alunos': typeof AdminAlunosRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
@@ -102,7 +145,13 @@ export interface FileRoutesByFullPath {
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
   '/admin/turmas': typeof AdminTurmasRoute
+  '/professor/avaliacoes': typeof ProfessorAvaliacoesRoute
+  '/professor/correcoes': typeof ProfessorCorrecoesRoute
+  '/professor/perfil': typeof ProfessorPerfilRoute
+  '/professor/resultados': typeof ProfessorResultadosRoute
+  '/professor/turmas': typeof ProfessorTurmasRoute
   '/admin/': typeof AdminIndexRoute
+  '/professor/': typeof ProfessorIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -116,13 +165,20 @@ export interface FileRoutesByTo {
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
   '/admin/turmas': typeof AdminTurmasRoute
+  '/professor/avaliacoes': typeof ProfessorAvaliacoesRoute
+  '/professor/correcoes': typeof ProfessorCorrecoesRoute
+  '/professor/perfil': typeof ProfessorPerfilRoute
+  '/professor/resultados': typeof ProfessorResultadosRoute
+  '/professor/turmas': typeof ProfessorTurmasRoute
   '/admin': typeof AdminIndexRoute
+  '/professor': typeof ProfessorIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/professor': typeof ProfessorRouteWithChildren
   '/setup': typeof SetupRoute
   '/admin/alunos': typeof AdminAlunosRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
@@ -132,7 +188,13 @@ export interface FileRoutesById {
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
   '/admin/turmas': typeof AdminTurmasRoute
+  '/professor/avaliacoes': typeof ProfessorAvaliacoesRoute
+  '/professor/correcoes': typeof ProfessorCorrecoesRoute
+  '/professor/perfil': typeof ProfessorPerfilRoute
+  '/professor/resultados': typeof ProfessorResultadosRoute
+  '/professor/turmas': typeof ProfessorTurmasRoute
   '/admin/': typeof AdminIndexRoute
+  '/professor/': typeof ProfessorIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,6 +202,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/login'
+    | '/professor'
     | '/setup'
     | '/admin/alunos'
     | '/admin/avaliacoes'
@@ -149,7 +212,13 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/admin/relatorios'
     | '/admin/turmas'
+    | '/professor/avaliacoes'
+    | '/professor/correcoes'
+    | '/professor/perfil'
+    | '/professor/resultados'
+    | '/professor/turmas'
     | '/admin/'
+    | '/professor/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -163,12 +232,19 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/admin/relatorios'
     | '/admin/turmas'
+    | '/professor/avaliacoes'
+    | '/professor/correcoes'
+    | '/professor/perfil'
+    | '/professor/resultados'
+    | '/professor/turmas'
     | '/admin'
+    | '/professor'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/login'
+    | '/professor'
     | '/setup'
     | '/admin/alunos'
     | '/admin/avaliacoes'
@@ -178,13 +254,20 @@ export interface FileRouteTypes {
     | '/admin/professores'
     | '/admin/relatorios'
     | '/admin/turmas'
+    | '/professor/avaliacoes'
+    | '/professor/correcoes'
+    | '/professor/perfil'
+    | '/professor/resultados'
+    | '/professor/turmas'
     | '/admin/'
+    | '/professor/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   LoginRoute: typeof LoginRoute
+  ProfessorRoute: typeof ProfessorRouteWithChildren
   SetupRoute: typeof SetupRoute
 }
 
@@ -209,6 +292,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/professor': {
+      id: '/professor'
+      path: '/professor'
+      fullPath: '/professor'
+      preLoaderRoute: typeof ProfessorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/setup': {
@@ -281,6 +371,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTurmasRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/professor/': {
+      id: '/professor/'
+      path: '/'
+      fullPath: '/professor/'
+      preLoaderRoute: typeof ProfessorIndexRouteImport
+      parentRoute: typeof ProfessorRoute
+    }
+    '/professor/avaliacoes': {
+      id: '/professor/avaliacoes'
+      path: '/avaliacoes'
+      fullPath: '/professor/avaliacoes'
+      preLoaderRoute: typeof ProfessorAvaliacoesRouteImport
+      parentRoute: typeof ProfessorRoute
+    }
+    '/professor/correcoes': {
+      id: '/professor/correcoes'
+      path: '/correcoes'
+      fullPath: '/professor/correcoes'
+      preLoaderRoute: typeof ProfessorCorrecoesRouteImport
+      parentRoute: typeof ProfessorRoute
+    }
+    '/professor/perfil': {
+      id: '/professor/perfil'
+      path: '/perfil'
+      fullPath: '/professor/perfil'
+      preLoaderRoute: typeof ProfessorPerfilRouteImport
+      parentRoute: typeof ProfessorRoute
+    }
+    '/professor/resultados': {
+      id: '/professor/resultados'
+      path: '/resultados'
+      fullPath: '/professor/resultados'
+      preLoaderRoute: typeof ProfessorResultadosRouteImport
+      parentRoute: typeof ProfessorRoute
+    }
+    '/professor/turmas': {
+      id: '/professor/turmas'
+      path: '/turmas'
+      fullPath: '/professor/turmas'
+      preLoaderRoute: typeof ProfessorTurmasRouteImport
+      parentRoute: typeof ProfessorRoute
+    }
   }
 }
 
@@ -310,10 +442,33 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface ProfessorRouteChildren {
+  ProfessorAvaliacoesRoute: typeof ProfessorAvaliacoesRoute
+  ProfessorCorrecoesRoute: typeof ProfessorCorrecoesRoute
+  ProfessorPerfilRoute: typeof ProfessorPerfilRoute
+  ProfessorResultadosRoute: typeof ProfessorResultadosRoute
+  ProfessorTurmasRoute: typeof ProfessorTurmasRoute
+  ProfessorIndexRoute: typeof ProfessorIndexRoute
+}
+
+const ProfessorRouteChildren: ProfessorRouteChildren = {
+  ProfessorAvaliacoesRoute: ProfessorAvaliacoesRoute,
+  ProfessorCorrecoesRoute: ProfessorCorrecoesRoute,
+  ProfessorPerfilRoute: ProfessorPerfilRoute,
+  ProfessorResultadosRoute: ProfessorResultadosRoute,
+  ProfessorTurmasRoute: ProfessorTurmasRoute,
+  ProfessorIndexRoute: ProfessorIndexRoute,
+}
+
+const ProfessorRouteWithChildren = ProfessorRoute._addFileChildren(
+  ProfessorRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   LoginRoute: LoginRoute,
+  ProfessorRoute: ProfessorRouteWithChildren,
   SetupRoute: SetupRoute,
 }
 export const routeTree = rootRouteImport
