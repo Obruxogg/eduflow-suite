@@ -42,6 +42,7 @@ export const bootstrapFirstAdmin = createServerFn({ method: "POST" })
       user_metadata: { full_name: data.fullName },
     });
     if (createError || !created.user) {
+      console.error("bootstrapFirstAdmin createUser failed", createError);
       return {
         ok: false as const,
         message: "Não foi possível criar o administrador. Verifique se o e-mail já está em uso.",
