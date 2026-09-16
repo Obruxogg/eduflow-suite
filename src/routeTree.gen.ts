@@ -16,8 +16,10 @@ import { Route as SetupRouteImport } from './routes/setup'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAvaliacoesRouteImport } from './routes/admin.avaliacoes'
 import { Route as AdminCursosRouteImport } from './routes/admin.cursos'
+import { Route as AdminModulosRouteImport } from './routes/admin.modulos'
 import { Route as AdminProfessoresRouteImport } from './routes/admin.professores'
 import { Route as AdminRelatoriosRouteImport } from './routes/admin.relatorios'
+import { Route as AdminTurmasRouteImport } from './routes/admin.turmas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -54,6 +56,11 @@ const AdminCursosRoute = AdminCursosRouteImport.update({
   path: '/cursos',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminModulosRoute = AdminModulosRouteImport.update({
+  id: '/modulos',
+  path: '/modulos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminProfessoresRoute = AdminProfessoresRouteImport.update({
   id: '/professores',
   path: '/professores',
@@ -64,6 +71,11 @@ const AdminRelatoriosRoute = AdminRelatoriosRouteImport.update({
   path: '/relatorios',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminTurmasRoute = AdminTurmasRouteImport.update({
+  id: '/turmas',
+  path: '/turmas',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,8 +84,10 @@ export interface FileRoutesByFullPath {
   '/setup': typeof SetupRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
   '/admin/cursos': typeof AdminCursosRoute
+  '/admin/modulos': typeof AdminModulosRoute
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
+  '/admin/turmas': typeof AdminTurmasRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -82,8 +96,10 @@ export interface FileRoutesByTo {
   '/setup': typeof SetupRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
   '/admin/cursos': typeof AdminCursosRoute
+  '/admin/modulos': typeof AdminModulosRoute
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
+  '/admin/turmas': typeof AdminTurmasRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -94,8 +110,10 @@ export interface FileRoutesById {
   '/setup': typeof SetupRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
   '/admin/cursos': typeof AdminCursosRoute
+  '/admin/modulos': typeof AdminModulosRoute
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
+  '/admin/turmas': typeof AdminTurmasRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -107,8 +125,10 @@ export interface FileRouteTypes {
     | '/setup'
     | '/admin/avaliacoes'
     | '/admin/cursos'
+    | '/admin/modulos'
     | '/admin/professores'
     | '/admin/relatorios'
+    | '/admin/turmas'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -117,8 +137,10 @@ export interface FileRouteTypes {
     | '/setup'
     | '/admin/avaliacoes'
     | '/admin/cursos'
+    | '/admin/modulos'
     | '/admin/professores'
     | '/admin/relatorios'
+    | '/admin/turmas'
     | '/admin'
   id:
     | '__root__'
@@ -128,8 +150,10 @@ export interface FileRouteTypes {
     | '/setup'
     | '/admin/avaliacoes'
     | '/admin/cursos'
+    | '/admin/modulos'
     | '/admin/professores'
     | '/admin/relatorios'
+    | '/admin/turmas'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -191,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCursosRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/modulos': {
+      id: '/admin/modulos'
+      path: '/modulos'
+      fullPath: '/admin/modulos'
+      preLoaderRoute: typeof AdminModulosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/professores': {
       id: '/admin/professores'
       path: '/professores'
@@ -205,22 +236,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRelatoriosRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/turmas': {
+      id: '/admin/turmas'
+      path: '/turmas'
+      fullPath: '/admin/turmas'
+      preLoaderRoute: typeof AdminTurmasRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
   AdminAvaliacoesRoute: typeof AdminAvaliacoesRoute
   AdminCursosRoute: typeof AdminCursosRoute
+  AdminModulosRoute: typeof AdminModulosRoute
   AdminProfessoresRoute: typeof AdminProfessoresRoute
   AdminRelatoriosRoute: typeof AdminRelatoriosRoute
+  AdminTurmasRoute: typeof AdminTurmasRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAvaliacoesRoute: AdminAvaliacoesRoute,
   AdminCursosRoute: AdminCursosRoute,
+  AdminModulosRoute: AdminModulosRoute,
   AdminProfessoresRoute: AdminProfessoresRoute,
   AdminRelatoriosRoute: AdminRelatoriosRoute,
+  AdminTurmasRoute: AdminTurmasRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
