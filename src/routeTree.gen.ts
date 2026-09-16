@@ -14,8 +14,10 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAlunosRouteImport } from './routes/admin.alunos'
 import { Route as AdminAvaliacoesRouteImport } from './routes/admin.avaliacoes'
 import { Route as AdminCursosRouteImport } from './routes/admin.cursos'
+import { Route as AdminMatriculasRouteImport } from './routes/admin.matriculas'
 import { Route as AdminModulosRouteImport } from './routes/admin.modulos'
 import { Route as AdminProfessoresRouteImport } from './routes/admin.professores'
 import { Route as AdminRelatoriosRouteImport } from './routes/admin.relatorios'
@@ -46,6 +48,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminAlunosRoute = AdminAlunosRouteImport.update({
+  id: '/alunos',
+  path: '/alunos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminAvaliacoesRoute = AdminAvaliacoesRouteImport.update({
   id: '/avaliacoes',
   path: '/avaliacoes',
@@ -54,6 +61,11 @@ const AdminAvaliacoesRoute = AdminAvaliacoesRouteImport.update({
 const AdminCursosRoute = AdminCursosRouteImport.update({
   id: '/cursos',
   path: '/cursos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMatriculasRoute = AdminMatriculasRouteImport.update({
+  id: '/matriculas',
+  path: '/matriculas',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminModulosRoute = AdminModulosRouteImport.update({
@@ -82,8 +94,10 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
   '/setup': typeof SetupRoute
+  '/admin/alunos': typeof AdminAlunosRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
   '/admin/cursos': typeof AdminCursosRoute
+  '/admin/matriculas': typeof AdminMatriculasRoute
   '/admin/modulos': typeof AdminModulosRoute
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
@@ -94,8 +108,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/setup': typeof SetupRoute
+  '/admin/alunos': typeof AdminAlunosRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
   '/admin/cursos': typeof AdminCursosRoute
+  '/admin/matriculas': typeof AdminMatriculasRoute
   '/admin/modulos': typeof AdminModulosRoute
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
@@ -108,8 +124,10 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
   '/setup': typeof SetupRoute
+  '/admin/alunos': typeof AdminAlunosRoute
   '/admin/avaliacoes': typeof AdminAvaliacoesRoute
   '/admin/cursos': typeof AdminCursosRoute
+  '/admin/matriculas': typeof AdminMatriculasRoute
   '/admin/modulos': typeof AdminModulosRoute
   '/admin/professores': typeof AdminProfessoresRoute
   '/admin/relatorios': typeof AdminRelatoriosRoute
@@ -123,8 +141,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/login'
     | '/setup'
+    | '/admin/alunos'
     | '/admin/avaliacoes'
     | '/admin/cursos'
+    | '/admin/matriculas'
     | '/admin/modulos'
     | '/admin/professores'
     | '/admin/relatorios'
@@ -135,8 +155,10 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/setup'
+    | '/admin/alunos'
     | '/admin/avaliacoes'
     | '/admin/cursos'
+    | '/admin/matriculas'
     | '/admin/modulos'
     | '/admin/professores'
     | '/admin/relatorios'
@@ -148,8 +170,10 @@ export interface FileRouteTypes {
     | '/admin'
     | '/login'
     | '/setup'
+    | '/admin/alunos'
     | '/admin/avaliacoes'
     | '/admin/cursos'
+    | '/admin/matriculas'
     | '/admin/modulos'
     | '/admin/professores'
     | '/admin/relatorios'
@@ -201,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/alunos': {
+      id: '/admin/alunos'
+      path: '/alunos'
+      fullPath: '/admin/alunos'
+      preLoaderRoute: typeof AdminAlunosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/avaliacoes': {
       id: '/admin/avaliacoes'
       path: '/avaliacoes'
@@ -213,6 +244,13 @@ declare module '@tanstack/react-router' {
       path: '/cursos'
       fullPath: '/admin/cursos'
       preLoaderRoute: typeof AdminCursosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/matriculas': {
+      id: '/admin/matriculas'
+      path: '/matriculas'
+      fullPath: '/admin/matriculas'
+      preLoaderRoute: typeof AdminMatriculasRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/modulos': {
@@ -247,8 +285,10 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteChildren {
+  AdminAlunosRoute: typeof AdminAlunosRoute
   AdminAvaliacoesRoute: typeof AdminAvaliacoesRoute
   AdminCursosRoute: typeof AdminCursosRoute
+  AdminMatriculasRoute: typeof AdminMatriculasRoute
   AdminModulosRoute: typeof AdminModulosRoute
   AdminProfessoresRoute: typeof AdminProfessoresRoute
   AdminRelatoriosRoute: typeof AdminRelatoriosRoute
@@ -257,8 +297,10 @@ interface AdminRouteChildren {
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAlunosRoute: AdminAlunosRoute,
   AdminAvaliacoesRoute: AdminAvaliacoesRoute,
   AdminCursosRoute: AdminCursosRoute,
+  AdminMatriculasRoute: AdminMatriculasRoute,
   AdminModulosRoute: AdminModulosRoute,
   AdminProfessoresRoute: AdminProfessoresRoute,
   AdminRelatoriosRoute: AdminRelatoriosRoute,
