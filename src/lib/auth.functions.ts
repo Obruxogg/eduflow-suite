@@ -42,11 +42,7 @@ export const bootstrapFirstAdmin = createServerFn({ method: "POST" })
       user_metadata: { full_name: data.fullName },
     });
     if (createError || !created.user) {
-      console.error("bootstrapFirstAdmin createUser failed", createError);
-      return {
-        ok: false as const,
-        message: "Não foi possível criar o administrador. Verifique se o e-mail já está em uso.",
-      };
+      return { ok: false as const, message: describeSignupError(createError) };
     }
 
     const userId = created.user.id;
@@ -91,10 +87,7 @@ export const createTeacherWithAccess = createServerFn({ method: "POST" })
       user_metadata: { full_name: data.name },
     });
     if (createError || !created.user) {
-      return {
-        ok: false as const,
-        message: "Não foi possível criar o acesso. Verifique se o e-mail já está em uso.",
-      };
+      return { ok: false as const, message: describeSignupError(createError) };
     }
 
     const userId = created.user.id;
